@@ -1,3 +1,4 @@
+
 class Account {
     constructor(accountType, daysOverdrawn) {
         this.type = accountType;
@@ -10,16 +11,8 @@ class Account {
         return result;
     }
 
-    get overdraftCharge() {
-        if (this.type.isPremium) {
-            const baseCharge = 10;
-            if (this.daysOverdrawn <= 7)
-                return baseCharge;
-            else
-                return baseCharge + (this.daysOverdrawn - 7) * 0.85;
-        }
-        else
-            return this.daysOverdrawn * 1.75;
+    overdraftCharge() {
+        return this.type.overdraftCharge(this.daysOverdrawn);
     }
 
     get daysOverdrawn() {
@@ -27,5 +20,29 @@ class Account {
     }
 }
 
+class AccountType {
+    constructor(type) {
+        this._type = type;
+    }
+    get isPremium() {
+        return this._type === 'Premium';
+    }
 
-module.exports = Account;
+    overdraftCharge(daysOverdrawn) {
+        if (this.isPremium) {
+            const baseCharge = 10;
+            if (daysOverdrawn <= 7)
+                return baseCharge;
+            else
+                return baseCharge + (daysOverdrawn - 7) * 0.85;
+        } else
+            return daysOverdrawn * 1.75;
+    }
+
+}
+
+
+module.exports = {
+    Account : Account,
+    AccountType : AccountType
+  };
