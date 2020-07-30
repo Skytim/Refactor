@@ -1,4 +1,4 @@
-export function trackSummary(points) {
+function trackSummary(points) {
     const totalTime = calculateTime();
     const pace = totalTime / 60 / totalDistance(points);
     return {
@@ -9,7 +9,7 @@ export function trackSummary(points) {
 
     function calculateTime() {
         //just a hard code number
-        return 10000;
+        return 1200000;
     }
 }
 
@@ -37,3 +37,5 @@ function distance(p1, p2) {
 function radians(degrees) {
     return degrees * Math.PI / 180;
 }
+
+module.exports = trackSummary;
