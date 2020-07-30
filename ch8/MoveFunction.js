@@ -38,5 +38,11 @@ function distance(p1, p2) {
 function radians(degrees) {
     return degrees * Math.PI / 180;
 }
-
+function top_calculateDistance() {
+    let result = 0;
+    for (let i = 1; i < points.length; i++) {
+        result += distance(points[i - 1], points[i]);
+    }
+    return result;
+}
 module.exports = trackSummary;
