@@ -1,9 +1,10 @@
 function trackSummary(points) {
     const totalTime = calculateTime();
-    const pace = totalTime / 60 / totalDistance(points);
+    const totalDistance = calculateDistance();
+    const pace = totalTime / 60 / totalDistance;
     return {
         time: totalTime,
-        distance: totalDistance(points),
+        distance: totalDistance,
         pace: pace
     };
 
@@ -11,15 +12,15 @@ function trackSummary(points) {
         //just a hard code number
         return 1200000;
     }
+    function calculateDistance() {
+        let result = 0;
+        for (let i = 1; i < points.length; i++) {
+            result += distance(points[i - 1], points[i]);
+        }
+        return result;
+    }
 }
 
-function totalDistance(points) {
-    let result = 0;
-    for (let i = 1; i < points.length; i++) {
-        result += distance(points[i - 1], points[i]);
-    }
-    return result;
-}
 
 function distance(p1, p2) {
     // haversine formula see http://www.movable-type.co.uk/scripts/latlong.html
