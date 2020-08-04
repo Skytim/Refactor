@@ -10,7 +10,6 @@ class ProductionPlan {
 
     applyAdjustment(anAdjustment) {
         this._adjustments.push(anAdjustment);
-        this._production.amount += anAdjustment.amount;
     }
     get calculatedProduction() {
         return this._adjustments.reduce((sum, a) => sum + a.amount, 0);

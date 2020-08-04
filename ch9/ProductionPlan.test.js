@@ -2,5 +2,5 @@ const productionPlan = require('./ProductionPlan');
 
 test('Expect productionPlan', () => {
 
-    expect(productionPlan.production.amount).toBe(2468);
+    expect(productionPlan.production.amount).toBe(productionPlan.calculatedProduction);
 });
