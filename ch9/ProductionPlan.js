@@ -1,22 +1,18 @@
 class ProductionPlan {
     constructor(production) {
-        this._initialProduction = production;
-        this._productionAccumulator = 0;
+        this._production = production;
         this._adjustments = [];
+        this._adjustments.push(production);
     }
     get production() {
-        return this._initialProduction + this._productionAccumulator;
-    }
-
-    get calculatedProductionAccumulator() {
-        return this._adjustments.reduce((sum, adjustment) => sum + adjustment, 0);
+        return this._production;
     }
 
     applyAdjustment(anAdjustment) {
         this._adjustments.push(anAdjustment);
-        this._productionAccumulator += anAdjustment;
+        this._production += anAdjustment.amount;
     }
 }
-const productionPlan = new ProductionPlan(0);
-productionPlan.applyAdjustment(1234);
+const productionPlan = new ProductionPlan(1000);
+productionPlan.applyAdjustment({ data: 100, amount: 1234 });
 module.exports = productionPlan;
